@@ -3,6 +3,7 @@ forge "http://forge.puppetlabs.com"
 # Modules from the Puppet Forge
 mod "puppetlabs/ntp"
 mod "puppetlabs/git"
+mod "puppetlabs/vcsrepo"
 mod "puppetlabs/apt"
 mod "saz/vim"
 mod "saz/sudo"
