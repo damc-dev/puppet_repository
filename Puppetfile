@@ -1,6 +1,7 @@
 forge "http://forge.puppetlabs.com"
 
 # Modules from the Puppet Forge
+mod "puppetlabs/stdlib"
 mod "puppetlabs/ntp"
 mod "puppetlabs/git"
 mod "puppetlabs/vcsrepo"
@@ -8,6 +9,8 @@ mod "puppetlabs/apt"
 mod "saz/vim"
 mod "saz/sudo"
 mod "jfryman/nginx"
+mod "nanliu/staging"
+mod "AlexCline/dirtree"
 mod "counsyl/packer"
 mod "counsyl/sys"
 
