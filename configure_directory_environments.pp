@@ -23,3 +23,11 @@ ini_setting { 'Configure basemodulepath':
   setting => 'basemodulepath',
   value   => '$confdir/modules:/opt/puppet/share/puppet/modules',
 }
+
+ini_setting {'Remove Depreciated templatedir':
+  ensure  => 'absent',
+  section => 'main',
+  setting => 'templatedir',
+  value   => 'DEPRECIATED',
+}
+
