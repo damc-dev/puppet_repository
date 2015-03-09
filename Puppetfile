@@ -7,6 +7,7 @@ mod "puppetlabs/apt"
 mod "saz/vim"
 mod "saz/sudo"
 mod "jfryman/nginx"
+mod "counsyl/packer"
 
 # Modules from Github using various references
 mod 'notifyme',
