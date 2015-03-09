@@ -5,6 +5,7 @@ mod "puppetlabs/ntp"
 mod "puppetlabs/git"
 mod "saz/vim"
 mod "saz/sudo"
+mod "jfryman/nginx"
 
 # Modules from Github using various references
 mod 'notifyme',
