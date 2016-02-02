@@ -14,6 +14,17 @@ class profile::base {
         value => 'damc.dev@gmail.com',
         require => Package['git'],
     }
+
+    vcsrepo { '/etc/vim/.vim':
+    	ensure  => latest,
+	provider => git,
+	source => 'https://github.com/damc-dev/.vim.git'
+    } -> file { '/etc/vim/vimrc.local':
+    	ensure => 'link',
+	target => '/etc/vim/.vim/vimrc',
+	require => File['/etc/vim/.vim/vimrc']
+    }
+
 }
 
 class profile::devops {
