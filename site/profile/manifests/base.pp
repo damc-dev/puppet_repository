@@ -26,28 +26,3 @@ class profile::base {
     }
 
 }
-
-class profile::devops {
-
-}
-
-class profile::devops::mypacker inherits profile::devops {
-
-    class { 
-	'packer':
-    } ->
-    file { '/usr/bin/packer':
-	ensure => 'link',
-	target => '/usr/local/bin/packer',
-    }
-}
-
-class profile::webserver {
-    include nginx
-}
-
-class profile::webserver::dev inherits profile::webserver {
-    # special sauce
-}
-
-
