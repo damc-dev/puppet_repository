@@ -14,7 +14,7 @@ puppet module install puppetlabs/inifile
 puppet apply configure_directory_environments.pp
 ```
 
-### Backup / Delete Existing Environments Directory
+### Backup / Delete Existing Directory Environments
 ```
 mv /etc/puppet/environments /etc/puppet/backup_environments
 ```
