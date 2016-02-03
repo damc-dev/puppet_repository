@@ -2,6 +2,7 @@ forge "http://forge.puppetlabs.com"
 
 # Modules from the Puppet Forge
 mod "puppetlabs/stdlib"
+mod "puppetlabs/concat"
 mod "puppetlabs/ntp"
 mod "puppetlabs/git"
 mod "puppetlabs/vcsrepo"
