@@ -69,9 +69,11 @@ class profile::base {
     mode   => '440',
   }
 
-  service {'rsyslogd': 
-    ensure    => 'running',
-    enable    => true,
-    subscribe => File['/etc/rsyslog.d/ssh_auditd'],
+  service {'rsyslog': 
+    ensure     => 'running',
+    enable     => true,
+    hasstatus  => true,
+    hasrestart => true,
+    subscribe  => File['/etc/rsyslog.d/ssh_auditd'],
   }
 }
