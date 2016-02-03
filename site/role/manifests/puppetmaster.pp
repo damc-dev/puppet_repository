@@ -1,3 +1,3 @@
-class puppetmaster {
+class role::puppetmaster {
     include profile::base
 }
