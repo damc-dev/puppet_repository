@@ -1,0 +1,15 @@
+# This file is managed by Information Assurance
+$RuleSet PROD-SSH-AuditdLogs-INFO
+local2.info @siem.dsa.tla.uprr.com:520
+
+# Audit Logs
+$InputFileName /var/log/audit/audit.log
+$InputFileTag ssh-auditd
+$InputFileStateFile state-file-ssh-auditd
+$InputFileSeverity info
+$InputFileFacility local2
+$InputFilePollInterval 1
+$InputFilePersistStateInterval 1
+$InputFileBindRuleset PROD-SSH-AuditdLogs-INFO
+# Eventually will move into log reader master rulesets
+$InputRunFileMonitor

@@ -55,4 +55,23 @@ class profile::base {
     hasstatus => true,
     subscribe => File[ '/etc/audit/audit.rules'],
   }
+
+  package {'rsyslog':
+    ensure => 'present',
+    name   => 'rsyslog',
+  }
+
+  file {'/etc/rsyslog.d/ssh_auditd':
+    ensure => file,
+    source => 'puppet:///modules/profile/rsyslogd_ssh_auditd',
+    owner  => 'root',
+    group  => 'root',
+    mode   => '440',
+  }
+
+  service {'rsyslogd': 
+    ensure    => 'running',
+    enable    => true,
+    subscribe => File['/etc/rsyslog.d/ssh_auditd'],
+  }
 }
