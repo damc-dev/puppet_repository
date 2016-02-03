@@ -16,10 +16,10 @@
 # This configures puppet agent and puppet inspect to back up file contents when
 # they run. The Puppet Enterprise console needs this to display file contents
 # and differences.
-
+notify { "Setting fileserver to: $facts['hostname']": }
 # Define filebucket 'main':
 filebucket { 'main':
-  server => 'master',
+  server => 'foreman.nyc3.damc-dev.com',
   path   => false,
 }
 
