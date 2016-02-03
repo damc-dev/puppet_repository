@@ -17,14 +17,14 @@ class profile::base {
 
     vcsrepo { '/etc/vim/.vim':
     	ensure  => latest,
-	provider => git,
-	source => 'https://github.com/damc-dev/.vim.git'
+	    provider => git,
+	    source => 'https://github.com/damc-dev/.vim.git',
+      before => File['/etc/vim/vimrc.local']
     }
  
     file { '/etc/vim/vimrc.local':
     	ensure => 'link',
-	target => '/etc/vim/.vim/vimrc',
-	require => File['/etc/vim/.vim/vimrc']
+	    target => '/etc/vim/.vim/vimrc',
     }
 
 }
