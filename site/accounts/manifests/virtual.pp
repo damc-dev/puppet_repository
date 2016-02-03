@@ -1,11 +1,11 @@
-define accounts::virtual ($uid,$realname) {
+define accounts::virtual ($uid,$realName) {
   user { $title:
     ensure            =>  'present',
     uid               =>  $uid,
     gid               =>  $title,
     shell             =>  '/bin/bash',
     home              =>  "/home/${title}",
-    comment           =>  $realname,
+    comment           =>  $realName,
     managehome        =>  true,
     require           =>  Group[$title],
   }
