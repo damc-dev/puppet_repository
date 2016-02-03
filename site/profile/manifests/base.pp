@@ -4,31 +4,34 @@ class profile::base {
 	  git,
 	  vim,
 	  sudo,
-	  '::ntp'
+	  '::ntp',
+    accounts
 
-    git::config { 'user.name':
-        value => 'David McElligott',
-        require => Package['git'],
-    }
+  realize (Accounts::Virtual['david'])
 
-    git::config { 'user.email':
-        value => 'damc.dev@gmail.com',
-        require => Package['git'],
-    }
+  git::config { 'user.name':
+      value => 'David McElligott',
+      require => Package['git'],
+  }
 
-    file { '/software':
-      ensure => 'directory',
-      mode => '0755',
-    }
+  git::config { 'user.email':
+      value => 'damc.dev@gmail.com',
+      require => Package['git'],
+  }
 
-    file { '/logs':
-      ensure => 'directory',
-      mode => '0755',
-    }
-   
-    file { '/etc/vim/vimrc.local':
-    	ensure => file,
-	    source => 'puppet:///modules/profile/vimrc',
-      mode   => '0755',
-    }
+  file { '/software':
+    ensure => 'directory',
+    mode => '0755',
+  }
+
+  file { '/logs':
+    ensure => 'directory',
+    mode => '0755',
+  }
+ 
+  file { '/etc/vim/vimrc.local':
+    ensure => file,
+    source => 'puppet:///modules/profile/vimrc',
+    mode   => '0755',
+  }
 }
