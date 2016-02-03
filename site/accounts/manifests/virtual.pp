@@ -1,4 +1,8 @@
 define accounts::virtual ($uid,$realName,$sshKey,$sshKeyType) {
+  include accounts::params
+
+  $sshDir = $accounts::params::ssh_dir
+
   user { $title:
     ensure            =>  'present',
     uid               =>  $uid,
@@ -23,26 +27,7 @@ define accounts::virtual ($uid,$realName,$sshKey,$sshKeyType) {
   }
 
   if ($sshKey != '') {
-    file { "/software/ssh/${title}":
-      ensure  => directory,
-      owner             =>  $title,
-      group             =>  $title,
-      mode              =>  0750,
-      require           =>  [ User[$title], Group[$title], File["/software/ssh"] ],
-    }
-
-    ssh_authorized_key { $title:
-      target  => "/software/ssh/${title}/authorized_keys",
-      ensure  => present,
-      name    => $title,
-      user    => $title,
-      type    => $sshKeyType,
-      key     => $sshKey,
-      require => File["/software/ssh/${title}"],
-    }
-
-
-    file { "/home/${title}/.ssh":
+    file { "${sshDir}":
       ensure  => directory,
       owner             =>  $title,
       group             =>  $title,
@@ -51,13 +36,13 @@ define accounts::virtual ($uid,$realName,$sshKey,$sshKeyType) {
     }
 
     ssh_authorized_key { $title:
-      target => "/software/ssh/${title}/authorized_keys",
-      ensure => present,
-      name   => $title,
-      user   => $title,
-      type   => $sshKeyType,
-      key    => $sshKey,
-      require => File["/home/${title}/.ssh"],
+      target  => "${sshDir}/authorized_keys",
+      ensure  => present,
+      name    => $title,
+      user    => $title,
+      type    => $sshKeyType,
+      key     => $sshKey,
+      require => File["${sshDir}"],
     }
-  }
+ }
 }
