@@ -14,10 +14,20 @@ class profile::base {
         value => 'damc.dev@gmail.com',
         require => Package['git'],
     }
+
+    file { '/software':
+      ensure => 'directory',
+      mode => '0755',
+    }
+
+    file { '/logs':
+      ensure => 'directory',
+      mode => '0755',
+    }
    
     file { '/etc/vim/vimrc.local':
     	ensure => file,
 	    source => 'puppet:///modules/profile/vimrc',
-      mode   => '0755'
+      mode   => '0755',
     }
 }
