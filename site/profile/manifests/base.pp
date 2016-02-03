@@ -7,7 +7,7 @@ class profile::base {
 	  '::ntp',
     accounts
 
-  realize (Accounts::Virtual['david'])
+  realize (Accounts::Virtual['test_user'])
 
   git::config { 'user.name':
       value => 'David McElligott',
