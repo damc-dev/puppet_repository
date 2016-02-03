@@ -1,7 +1,10 @@
-define accounts::virtual ($uid,$realName,$sshKey,$sshKeyType) {
-  include accounts::params
-
+define accounts::virtual (
+  $uid,
+  $realName,
+  $sshKey,
+  $sshKeyType,
   $sshDir = $accounts::params::ssh_dir
+) inherits accounts::params {
 
   user { $title:
     ensure            =>  'present',
