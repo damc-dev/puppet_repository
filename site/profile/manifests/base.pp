@@ -42,11 +42,17 @@ class profile::base {
   }
 
   file { '/etc/audit/audit.rules':
-    notify => Service['auditd'],
     ensure => file,
     source => 'puppet:///modules/profile/audit.rules',
     owner  => 'root',
     group  => 'root',
     mode   => '600',
+  }
+
+  service {'auditd':
+    ensure    => 'running',
+    enable    => true,
+    hasstatus => true,
+    subscribe => File[ '/etc/audit/audit.rules'],
   }
 }
