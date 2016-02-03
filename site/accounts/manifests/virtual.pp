@@ -3,9 +3,9 @@ define accounts::virtual (
   $realName,
   $sshKey,
   $sshKeyType,
-  $sshDir = $accounts::params::sshDir
-) inherits accounts::params {
-
+) {
+  $sshDir = "/home/${title}/.ssh"
+  
   user { $title:
     ensure            =>  'present',
     uid               =>  $uid,
