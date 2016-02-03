@@ -5,7 +5,8 @@ class profile::base {
 	  vim,
 	  sudo,
 	  '::ntp',
-    accounts
+    accounts,
+    '::auditd'
 
   realize (Accounts::Virtual['test_user'])
 
