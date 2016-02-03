@@ -1,0 +1,92 @@
+# This file contains the auditctl rules that are loaded
+# whenever the audit daemon is started via the initscripts.
+# The rules are simply the parameters that would be passed
+# to auditctl.
+
+# First rule - delete all
+-D
+
+## Failure Mode
+## Possible values are 0 (silent), 1 (printk, print a failure message),
+## and 2 (panic, halt the system).
+-f 1
+
+# Increase the buffers to survive stress events.
+# Make this bigger for busy systems
+-b 8192
+
+# Feel free to add below this line. See auditctl man page
+-a exit,always -F arch=b64 -S execve
+-a exit,always -F arch=b32 -S execve
+
+## Auditd configuration
+## modifications to audit configuration that occur while the audit
+## collection functions are operating.
+-w /etc/audit/ -p wa -k auditconfig
+-w /etc/audisp/ -p wa -k audispconfig
+
+## Monitor for use of audit management tools
+-w /sbin/auditctl -p x -k audittools
+-w /sbin/auditd -p x -k audittools
+
+## changes to the time
+-a exit,always -F arch=b32 -S adjtimex -S settimeofday -S stime -S clock_settime -k time
+-a exit,always -F arch=b64 -S adjtimex -S settimeofday -S clock_settime -k time
+#should we do /etc/localtime too?
+
+## user, group, password databases
+-w /etc/group -p wa -k etcgroup
+-w /etc/passwd -p wa -k etcpasswd
+-w /etc/gshadow -k etcgroup
+-w /etc/shadow -k etcpasswd
+-w /etc/security/opasswd -k opasswd
+
+#Monitor for use of tools to change group identifiers
+-w /usr/sbin/groupadd -p x -k group_modification
+-w /usr/sbin/groupmod -p x -k group_modification
+-w /usr/sbin/addgroup -p x -k group_modification
+-w /usr/sbin/useradd -p x -k user_modification
+-w /usr/sbin/usermod -p x -k user_modification
+-w /usr/sbin/adduser -p x -k user_modification
+
+## login configuration and information
+-w /etc/login.defs -p wa -k login
+-w /etc/securetty -p wa -k login
+
+## network configuration
+-w /etc/hosts -p wa -k hosts
+-w /etc/network/ -p wa -k network
+#should we watch /etc/sysconfig/network?
+
+## system startup scripts
+-w /etc/inittab -p wa -k init
+-w /etc/init.d/ -p wa -k init
+-w /etc/init/ -p wa -k init
+
+## library search paths
+-w /etc/ld.so.conf -p wa -k libpath
+
+## local time zone
+-w /etc/localtime -p wa -k localtime
+
+## kernel parameters
+-w /etc/sysctl.conf -p wa -k sysctl
+
+## modprobe configuration
+-w /etc/modprobe.conf -p wa -k modprobe
+
+## pam configuration
+-w /etc/pam.d/ -p wa -k pam
+-w /etc/security/limits.conf -p wa  -k pam
+-w /etc/security/pam_env.conf -p wa -k pam
+-w /etc/security/namespace.conf -p wa -k pam
+-w /etc/security/namespace.init -p wa -k pam
+
+## ssh configuration
+-w /etc/ssh/sshd_config -k sshd
+
+## Monitor for use of process ID change (switching accounts) applications
+-w /bin/su -p x -k priv_esc
+-w /usr/bin/sudo -p x -k priv_esc
+-w /etc/sudoers -p rw -k priv_esc
+

@@ -6,7 +6,6 @@ class profile::base {
 	  sudo,
 	  '::ntp',
     accounts,
-    '::auditd'
 
   realize (Accounts::Virtual['test_user'])
 
@@ -34,5 +33,20 @@ class profile::base {
     ensure => file,
     source => 'puppet:///modules/profile/vimrc',
     mode   => '0755',
+  }
+
+  package { 'auditd':
+    ensure => 'present',
+    name   => 'auditd',
+    before => File['/etc/audit/audit.rules'],
+  }
+
+  file { '/etc/audit/audit.rules':
+    notify => Service['auditd'],
+    ensure => file,
+    source => 'puppet:///modules/profile/audit.rules',
+    owner  => 'root',
+    group  => 'root',
+    mode   => '600',
   }
 }
