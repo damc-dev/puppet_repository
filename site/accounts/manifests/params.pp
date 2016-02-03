@@ -1,3 +1,3 @@
 class accounts::params {
-  $sshDir = "/home/${title}/.ssh"
+  $ssh_dir = "/home/${title}/.ssh"
 }
