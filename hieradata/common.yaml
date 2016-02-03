@@ -1,2 +1,6 @@
 ---
 message: "This node is using common data"
+
+jenkins_port: '9091'
+java_dist: 'jdk'
+java_version: 'latest'
