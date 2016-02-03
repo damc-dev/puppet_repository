@@ -13,7 +13,7 @@ mod "nanliu/staging"
 mod "AlexCline/dirtree"
 mod "counsyl/packer"
 mod "counsyl/sys"
-
+mod "kemra102/auditd"
 
 # Modules from Github using various references
 mod 'notifyme',
