@@ -3,7 +3,7 @@ define accounts::virtual (
   $realName,
   $sshKey,
   $sshKeyType,
-  $sshDir = $accounts::params::ssh_dir
+  $sshDir = $accounts::params::sshDir
 ) inherits accounts::params {
 
   user { $title:
