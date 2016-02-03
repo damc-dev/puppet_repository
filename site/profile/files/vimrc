@@ -8,9 +8,6 @@ set hidden " Leave hidden buffers open
 
 autocmd BufEnter * silent! lcd %:p:h " cd's to directory of file in window
 
-set bg=dark
-highlight comment ctermfg=darkgray
-
 set fileformat=unix
 set encoding=utf-8
 set expandtab
