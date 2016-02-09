@@ -34,46 +34,4 @@ class profile::base {
     source => 'puppet:///modules/profile/vimrc',
     mode   => '0755',
   }
-
-  package { 'auditd':
-    ensure => 'present',
-    name   => 'auditd',
-    before => File['/etc/audit/audit.rules'],
-  }
-
-  file { '/etc/audit/audit.rules':
-    ensure => file,
-    source => 'puppet:///modules/profile/audit.rules',
-    owner  => 'root',
-    group  => 'root',
-    mode   => '600',
-  }
-
-  service {'auditd':
-    ensure    => 'running',
-    enable    => true,
-    hasstatus => true,
-    subscribe => File[ '/etc/audit/audit.rules'],
-  }
-
-  package {'rsyslog':
-    ensure => 'present',
-    name   => 'rsyslog',
-  }
-
-  file {'/etc/rsyslog.d/ssh_auditd':
-    ensure => file,
-    source => 'puppet:///modules/profile/rsyslogd_ssh_auditd',
-    owner  => 'root',
-    group  => 'root',
-    mode   => '440',
-  }
-
-  service {'rsyslog': 
-    ensure     => 'running',
-    enable     => true,
-    hasstatus  => true,
-    hasrestart => true,
-    subscribe  => File['/etc/rsyslog.d/ssh_auditd'],
-  }
 }
